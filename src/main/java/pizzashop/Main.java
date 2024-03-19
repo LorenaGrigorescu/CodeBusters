@@ -27,7 +27,7 @@ public class Main extends Application {
         PaymentRepository payRepo= new PaymentRepository();
         PizzaService service = new PizzaService(repoMenu, payRepo);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/lorenagrigorescu/Anul3/Semestru2/VVSS/PizzaShop/src/main/resources/fxml/mainFXML.fxml"));
         //VBox box = loader.load();
         Parent box = loader.load();
         MainGUIController ctrl = loader.getController();
@@ -42,8 +42,8 @@ public class Main extends Application {
                 Optional<ButtonType> result = exitAlert.showAndWait();
                 if (result.get() == ButtonType.YES){
                     //Stage stage = (Stage) this.getScene().getWindow();
-                    System.out.println("Incasari cash: "+service.getTotalAmount(PaymentType.Cash));
-                    System.out.println("Incasari card: "+service.getTotalAmount(PaymentType.Card));
+                    System.out.println("Incasari cash: " + service.getTotalAmount(PaymentType.CASH));
+                    System.out.println("Incasari card: " + service.getTotalAmount(PaymentType.CARD));
 
                     primaryStage.close();
                 }
@@ -64,6 +64,7 @@ public class Main extends Application {
         kitchenGUI.KitchenGUI();
     }
 
-    public static void main(String[] args) { launch(args);
+    public static void main(String[] args) {
+        launch(args);
     }
 }

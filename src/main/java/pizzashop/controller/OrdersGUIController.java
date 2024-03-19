@@ -79,8 +79,7 @@ public class OrdersGUIController {
         //Controller for Place Order Button
         placeOrder.setOnAction(event ->{
             orderList= menuData.stream()
-                    .filter(x -> x.getQuantity()>0)
-                    .map(menuDataModel -> menuDataModel.getQuantity() +" "+ menuDataModel.getMenuItem())
+                    .map(MenuDataModel::getMenuItem)
                     .collect(Collectors.toList());
             observableList = FXCollections.observableList(orderList);
             KitchenGUIController.order.add("Table" + tableNumber +" "+ orderList.toString());
@@ -94,8 +93,7 @@ public class OrdersGUIController {
         //Controller for Pay Order Button
         payOrder.setOnAction(event -> {
             orderPaymentList= menuData.stream()
-                    .filter(x -> x.getQuantity()>0)
-                    .map(menuDataModel -> menuDataModel.getQuantity()*menuDataModel.getPrice())
+                    .map(MenuDataModel::getPrice)
                     .collect(Collectors.toList());
             setTotalAmount(orderPaymentList.stream().mapToDouble(e->e.doubleValue()).sum());
             orderStatus.setText("Total amount: " + getTotalAmount());
@@ -137,7 +135,7 @@ public class OrdersGUIController {
             orderTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<MenuDataModel>(){
             @Override
             public void changed(ObservableValue<? extends MenuDataModel> observable, MenuDataModel oldValue, MenuDataModel newValue){
-            oldValue.setQuantity(orderQuantity.getValue());
+//            oldValue.setQuantity(orderQuantity.getValue());
             orderTable.getSelectionModel().selectedItemProperty().removeListener(this);
                 }
             });
