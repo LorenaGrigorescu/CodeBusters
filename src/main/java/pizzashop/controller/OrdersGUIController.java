@@ -114,8 +114,6 @@ public class OrdersGUIController {
                 new PropertyValueFactory<MenuDataModel, String>("menuItem"));
         tablePrice.setCellValueFactory(
                 new PropertyValueFactory<MenuDataModel, Double>("price"));
-        tableQuantity.setCellValueFactory(
-                new PropertyValueFactory<MenuDataModel, Integer>("quantity"));
 
         //bind pizzaTypeLabel and quantity combo box with the selection on the table view
         orderTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<MenuDataModel>() {

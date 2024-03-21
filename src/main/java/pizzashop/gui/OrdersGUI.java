@@ -21,7 +21,7 @@ public class OrdersGUI {
     public void displayOrdersForm(PizzaService service){
      VBox vBoxOrders = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/lorenagrigorescu/Anul3/Semestru2/VVSS/PizzaShop/src/main/resources/fxml/OrdersGUIFXML.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OrdersGUIFXML.fxml"));
 
             //vBoxOrders = FXMLLoader.load(getClass().getResource("/fxml/OrdersGUIFXML.fxml"));
             vBoxOrders = loader.load();

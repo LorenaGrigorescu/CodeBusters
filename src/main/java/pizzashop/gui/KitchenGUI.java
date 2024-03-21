@@ -16,7 +16,7 @@ public class KitchenGUI {
         VBox vBoxKitchen = null;
 
         try {
-            vBoxKitchen = FXMLLoader.load(getClass().getResource("/Users/lorenagrigorescu/Anul3/Semestru2/VVSS/PizzaShop/src/main/resources/fxml/kitchenGUIFXML.fxml"));
+            vBoxKitchen = FXMLLoader.load(getClass().getResource("/fxml/kitchenGUIFXML.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

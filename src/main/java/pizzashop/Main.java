@@ -27,7 +27,7 @@ public class Main extends Application {
         PaymentRepository payRepo= new PaymentRepository();
         PizzaService service = new PizzaService(repoMenu, payRepo);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/lorenagrigorescu/Anul3/Semestru2/VVSS/PizzaShop/src/main/resources/fxml/mainFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainFXML.fxml"));
         //VBox box = loader.load();
         Parent box = loader.load();
         MainGUIController ctrl = loader.getController();
