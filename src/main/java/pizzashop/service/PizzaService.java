@@ -8,32 +8,44 @@ import pizzashop.repository.PaymentRepository;
 
 import java.util.List;
 
+
 public class PizzaService {
 
     private MenuRepository menuRepo;
     private PaymentRepository payRepo;
 
-    public PizzaService(MenuRepository menuRepo, PaymentRepository payRepo){
-        this.menuRepo=menuRepo;
-        this.payRepo=payRepo;
+    public PizzaService(MenuRepository menuRepo, PaymentRepository payRepo) {
+        this.menuRepo = menuRepo;
+        this.payRepo = payRepo;
     }
 
-    public List<MenuDataModel> getMenuData(){return menuRepo.getMenu();}
+    public PizzaService() {
+    }
 
-    public List<Payment> getPayments(){return payRepo.getAll(); }
+    public List<MenuDataModel> getMenuData() {
+        return menuRepo.getMenu();
+    }
 
-    public void addPayment(int table, PaymentType type, double amount){
-        Payment payment= new Payment(table, type, amount);
+    public List<Payment> getPayments() {
+        return payRepo.getAll();
+    }
+
+    public void addPayment(int table, PaymentType type, double amount) {
+        if(table < 0 || table > 8)
+            throw new IllegalArgumentException("illegal table number");
+        if(amount < 0)
+            throw new IllegalArgumentException("illegal amount");
+        Payment payment = new Payment(table, type, amount);
         payRepo.add(payment);
     }
 
-    public double getTotalAmount(PaymentType type){
-        double total=0.0f;
-        List<Payment> l=getPayments();
-        if ((l==null) ||(l.size()==0)) return total;
-        for (Payment p:l){
+    public double getTotalAmount(PaymentType type) {
+        double total = 0.0f;
+        List<Payment> l = getPayments();
+        if ((l == null) || (l.size() == 0)) return total;
+        for (Payment p : l) {
             if (p.getType().equals(type))
-                total+=p.getAmount();
+                total += p.getAmount();
         }
         return total;
     }
