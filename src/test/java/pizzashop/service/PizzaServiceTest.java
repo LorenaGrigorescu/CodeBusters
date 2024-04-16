@@ -41,7 +41,8 @@ class PizzaServiceTest {
         PaymentType paymentType = PaymentType.CASH;
         double amount = 122.78;
         doNothing().when(paymentRepository).add(any());
-        pizzaService.addPayment(table, paymentType, amount);
+        Assertions.assertDoesNotThrow(() -> pizzaService.addPayment(table, paymentType, amount));
+        verify(paymentRepository, times(1)).add(any());
     }
 
     @Test
@@ -49,7 +50,7 @@ class PizzaServiceTest {
         int table = 15;
         PaymentType paymentType = PaymentType.CASH;
         double amount = -122.78;
-        Throwable throwable = Assertions.assertThrows(IllegalArgumentException.class, ()->pizzaService.addPayment(table, paymentType, amount));
+        Throwable throwable = Assertions.assertThrows(IllegalArgumentException.class, () -> pizzaService.addPayment(table, paymentType, amount));
         Assertions.assertEquals("illegal table number", throwable.getMessage());
 
     }
@@ -60,7 +61,8 @@ class PizzaServiceTest {
         PaymentType paymentType = PaymentType.CASH;
         double amount = 122.78;
         doNothing().when(paymentRepository).add(any());
-        pizzaService.addPayment(table, paymentType, amount);
+        Assertions.assertDoesNotThrow(() -> pizzaService.addPayment(table, paymentType, amount));
+        verify(paymentRepository, times(1)).add(any());
     }
 
     @Test
@@ -68,7 +70,7 @@ class PizzaServiceTest {
         int table = 9;
         PaymentType paymentType = PaymentType.CASH;
         double amount = -122.78;
-        Throwable throwable = Assertions.assertThrows(IllegalArgumentException.class, ()->pizzaService.addPayment(table, paymentType, amount));
+        Throwable throwable = Assertions.assertThrows(IllegalArgumentException.class, () -> pizzaService.addPayment(table, paymentType, amount));
         Assertions.assertEquals("illegal table number", throwable.getMessage());
     }
 }
