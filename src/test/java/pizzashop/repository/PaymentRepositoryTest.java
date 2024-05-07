@@ -5,9 +5,7 @@ import org.mockito.Mock;
 import pizzashop.model.Payment;
 import pizzashop.model.PaymentType;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,7 +22,6 @@ class PaymentRepositoryTest {
         @Mock
         Payment payment;
 
-        @BeforeEach
         void initializeFile() {
             Path filePath = Paths.get("src/test/resources/payments.txt");
             if (Files.exists(filePath)) return;
@@ -36,8 +33,9 @@ class PaymentRepositoryTest {
         }
 
         @Test
-        void addTest() {
+        void addTest() throws FileNotFoundException {
             String filename = "src/test/resources/payments.txt";
+            initializeFile();
             Payment payment = new Payment(1, PaymentType.CARD, 100);
             paymentRepository.add(payment);
 
@@ -49,10 +47,14 @@ class PaymentRepositoryTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            PrintWriter writer = new PrintWriter(filename);
+            writer.print("");
+            writer.close();
         }
 
         @Test
         void addInListTest() {
+            initializeFile();
             paymentRepository.addInList(payment);
             List<Payment> payments = paymentRepository.getAll();
             Assertions.assertEquals(payments.size(), 1);
