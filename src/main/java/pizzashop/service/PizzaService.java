@@ -31,12 +31,20 @@ public class PizzaService {
     }
 
     public void addPayment(int table, PaymentType type, double amount) {
-        if(table < 0 || table > 8)
+        if (table < 0 || table > 8)
             throw new IllegalArgumentException("illegal table number");
-        if(amount < 0)
+        if (amount < 0)
             throw new IllegalArgumentException("illegal amount");
         Payment payment = new Payment(table, type, amount);
         payRepo.add(payment);
+    }
+
+    public void addPayment(Payment payment) {
+        if (payment.getTableNumber() < 0 || payment.getTableNumber() > 8)
+            throw new IllegalArgumentException("illegal table number");
+        if (payment.getAmount() < 0)
+            throw new IllegalArgumentException("illegal amount");
+        payRepo.addInList(payment);
     }
 
     public double getTotalAmount(String type) {
