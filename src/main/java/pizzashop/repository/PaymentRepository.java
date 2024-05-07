@@ -9,10 +9,15 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class PaymentRepository {
-    private static String filename = "data/payments.txt";
+    private String filename = "data/payments.txt";
     private List<Payment> paymentList;
 
     public PaymentRepository(){
+        this.paymentList = new ArrayList<>();
+        readPayments();
+    }
+    public PaymentRepository(String filename){
+        this.filename = filename;
         this.paymentList = new ArrayList<>();
         readPayments();
     }
@@ -50,6 +55,10 @@ public class PaymentRepository {
     public void add(Payment payment){
         paymentList.add(payment);
         writeAll();
+    }
+
+    public void addInList(Payment payment){
+        paymentList.add(payment);
     }
 
     public List<Payment> getAll(){

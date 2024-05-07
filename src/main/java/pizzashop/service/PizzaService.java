@@ -42,12 +42,13 @@ public class PizzaService {
     public double getTotalAmount(String type) {
         double total = 0.0f;
         List<Payment> l = getPayments();
+        PaymentType paymentType;
         try {
-            PaymentType paymentType = PaymentType.valueOf(type);
+            paymentType = PaymentType.valueOf(type);
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid payment type");
         }
-        PaymentType paymentType = PaymentType.valueOf(type);
+        paymentType = PaymentType.valueOf(type);
         if ((l == null))
             return total;
         if (l.isEmpty()) return total;

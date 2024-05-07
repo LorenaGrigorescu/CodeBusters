@@ -22,6 +22,8 @@ class PizzaServiceTest {
     }
 
     @Mock
+    Payment payment;
+    @Mock
     private PaymentRepository paymentRepository;
 
     @Mock
@@ -72,5 +74,40 @@ class PizzaServiceTest {
         double amount = -122.78;
         Throwable throwable = Assertions.assertThrows(IllegalArgumentException.class, () -> pizzaService.addPayment(table, paymentType, amount));
         Assertions.assertEquals("illegal table number", throwable.getMessage());
+    }
+
+    @Nested
+    @DisplayName("Integration testing S + R + E")
+    class IntegrationSRE {
+        private final PaymentRepository paymentRepository=new PaymentRepository("src/test/resources/payments.txt");
+        private final PizzaService pizzaService = new PizzaService(menuRepository, paymentRepository);
+
+        Payment payment = new Payment(1, PaymentType.CARD, 100);
+
+        void initialize() {
+            Path filePath = Paths.get("src/test/resources/payments.txt");
+            if (Files.exists(filePath)) return;
+            try {
+                Files.createFile(filePath);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Test
+        void addPayment_Integration_S_R_E() {
+            initialize();
+            pizzaService.addPayment(payment);
+            List<Payment> payments = pizzaService.getPayments();
+            Assertions.assertEquals(payments.size(), 1);
+        }
+
+        @Test
+        void getTotalAmount_Integration_S_R_E() {
+            pizzaService.addPayment(payment);
+            double allPaymentsCard = pizzaService.getTotalAmount("CARD");
+            Assertions.assertEquals(100, allPaymentsCard);
+        }
     }
 }
