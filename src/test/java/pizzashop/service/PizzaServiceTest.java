@@ -120,6 +120,7 @@ class PizzaServiceTest {
             Path filePath = Paths.get("src/test/resources/payments.txt");
             if (Files.exists(filePath)) return;
             try {
+                Files.createDirectories(filePath.getParent());
                 Files.createFile(filePath);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -153,6 +154,7 @@ class PizzaServiceTest {
             Path filePath = Paths.get("src/test/resources/payments.txt");
             if (Files.exists(filePath)) return;
             try {
+                Files.createDirectories(filePath.getParent());
                 Files.createFile(filePath);
             } catch (Exception e) {
                 e.printStackTrace();
