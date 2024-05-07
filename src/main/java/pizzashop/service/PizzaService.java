@@ -38,6 +38,13 @@ public class PizzaService {
         Payment payment = new Payment(table, type, amount);
         payRepo.add(payment);
     }
+    public void addPayment(Payment payment) {
+        if(payment.getTableNumber() < 0 || payment.getTableNumber() > 8)
+            throw new IllegalArgumentException("illegal table number");
+        if(payment.getAmount() < 0)
+            throw new IllegalArgumentException("illegal amount");
+        payRepo.addInList(payment);
+    }
 
     public void addPayment(Payment payment) {
         if (payment.getTableNumber() < 0 || payment.getTableNumber() > 8)
