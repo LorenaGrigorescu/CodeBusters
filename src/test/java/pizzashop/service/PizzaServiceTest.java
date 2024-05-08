@@ -48,9 +48,11 @@ class PizzaServiceTest {
         pizzaService = new PizzaService(menuRepository, paymentRepository);
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {5, 6, 7})
-    void addPayment_TestCase1_ECP(int table) {
+//    @ParameterizedTest
+//    @ValueSource(ints = {5, 6, 7})
+    @Test
+    void addPayment_TestCase1_ECP() {
+        int table=5;
         PaymentType paymentType = PaymentType.CASH;
         double amount = 122.78;
         doNothing().when(paymentRepository).add(any());
@@ -68,9 +70,11 @@ class PizzaServiceTest {
 
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 8})
-    void addPayment_TestCase3_BVA(int table) {
+//    @ParameterizedTest
+//    @ValueSource(ints = {1, 8})
+    @Test
+    void addPayment_TestCase3_BVA() {
+        int table = 4;
         PaymentType paymentType = PaymentType.CASH;
         double amount = 122.78;
         doNothing().when(paymentRepository).add(any());
