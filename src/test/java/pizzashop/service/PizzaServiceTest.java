@@ -48,16 +48,18 @@ class PizzaServiceTest {
         pizzaService = new PizzaService(menuRepository, paymentRepository);
     }
 
-//    @ParameterizedTest
-//    @ValueSource(ints = {5, 6, 7})
     @Test
     void addPayment_TestCase1_ECP() {
-        int table=5;
-        PaymentType paymentType = PaymentType.CASH;
-        double amount = 122.78;
-        doNothing().when(paymentRepository).add(any());
-        Assertions.assertDoesNotThrow(() -> pizzaService.addPayment(table, paymentType, amount));
-        verify(paymentRepository, times(1)).add(any());
+        for(int _table=5; _table<=7; _table++) {
+            int table = _table;
+            PaymentType paymentType = PaymentType.CASH;
+            double amount = 122.78;
+            doNothing().when(paymentRepository).add(any());
+
+            Assertions.assertDoesNotThrow(() -> pizzaService.addPayment(table, paymentType, amount));
+        }
+            verify(paymentRepository, times(3)).add(any());
+
     }
 
     @Test
@@ -70,16 +72,17 @@ class PizzaServiceTest {
 
     }
 
-//    @ParameterizedTest
-//    @ValueSource(ints = {1, 8})
     @Test
     void addPayment_TestCase3_BVA() {
-        int table = 4;
-        PaymentType paymentType = PaymentType.CASH;
-        double amount = 122.78;
-        doNothing().when(paymentRepository).add(any());
-        Assertions.assertDoesNotThrow(() -> pizzaService.addPayment(table, paymentType, amount));
-        verify(paymentRepository, times(1)).add(any());
+        for(int _table=1; _table<=8; _table++) {
+            int table = _table;
+            PaymentType paymentType = PaymentType.CASH;
+            double amount = 122.78;
+            doNothing().when(paymentRepository).add(any());
+            Assertions.assertDoesNotThrow(() -> pizzaService.addPayment(table, paymentType, amount));
+        }
+            verify(paymentRepository, times(8)).add(any());
+
     }
 
     @Test
